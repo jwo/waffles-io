@@ -1,37 +1,42 @@
 <% if @order.errors.any? %>
   <div class="errors">
-    <h3>Sorry brah, no waffles for you until you fix:</h3>
-    <ul>
-      <% @order.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
+    <div class="alert alert-danger" role="alert">
+      <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+      Oh no! Fix your order!
+    </div>
   </div>
 <% end %>
 
 <%= form_for @order do |f| %>
 
-  <div>
-    <%= f.label :customer_name %>
-    <%= f.text_field :customer_name %>
+  <div class="form-group <%= 'has-error' if @order.errors[:customer_name].any? %>">
+    <%= f.label :customer_name, class: "control-label" %>
+    <%= f.text_field :customer_name, class: "form-control" %>
+    <%= @order.errors[:customer_name].join(", ") %>
   </div>
 
-  <div>
-    <%= f.label :quantity %>
-    <%= f.text_field :quantity %>
+  <div class="form-group <%= 'has-error' if @order.errors[:quantity].any? %>">
+    <%= f.label :quantity, class: "control-label" %>
+    <%= f.text_field :quantity, class: "form-control" %>
+    <%= @order.errors[:quantity].join(", ") %>
+
   </div>
 
-  <div>
-    <%= f.label :waffle_type %>
-    <%= f.select :waffle_type, ["belgian", "Gold Debloom", "Chocolate Chip"], prompt: true %>
+  <div class="form-group <%= 'has-error' if @order.errors[:waffle_type].any? %>">
+    <%= f.label :waffle_type, class: "control-label" %>
+    <%= f.select :waffle_type, ["belgian", "Gold Debloom", "Chocolate Chip"], {prompt: true}, {class: "form-control"} %>
+    <%= @order.errors[:waffle_type].join(", ") %>
+
   </div>
 
-  <div>
-    <%= f.label :special_instructions %>
-    <%= f.text_area :special_instructions %>
+  <div class="form-group <%= 'has-error' if @order.errors[:special_instructions].any? %>">
+    <%= f.label :special_instructions, class: "control-label" %>
+    <%= f.text_area :special_instructions, class: "form-control" %>
+    <%= @order.errors[:special_instructions].join(", ") %>
+
   </div>
 
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-primary btn-lg" %>
 
 <% end %>
 

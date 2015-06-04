@@ -1,15 +1,16 @@
 <h1>Orders</h1>
 
-<%= link_to 'Add New Order', new_order_path %>
+<div class="well text-right">
+  <%= link_to 'Add New Order', new_order_path, class: "btn btn-default" %>
+</div>
 
-<p>List of Orders</p>
 
-<ul>
+<ul class="list-group">
   <% @orders.each do |order| %>
-    <li>
-      <%= order.quantity %> <%= order.waffle_type %>
-      <%= link_to "Show", order_path(id: order.id) %>
-      <%= link_to 'Edit', edit_order_path(id: order.id) %>
+
+    <li class="list-group-item">
+      <span class="badge"><%= order.quantity %></span>
+      <%= link_to order.waffle_type, order_path(id: order.id) %>
     </li>
   <% end %>
 </ul>
